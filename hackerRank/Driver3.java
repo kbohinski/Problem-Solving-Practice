@@ -48,7 +48,7 @@ public class Driver3 {
 		
 		System.out.println("Starting Values:");
 		for(int i = 0; i < (n-1); i++){
-			System.out.println(input[i]);
+			System.out.print(input[i] + " ");
 		} /* for */
 		
 		/*Executing stick length calculation program */
@@ -62,11 +62,11 @@ public class Driver3 {
 	 * @param int[] A : length of sticks
 	 */
 	public static int[] stickCut(int n, int[] A){
-		System.out.println("Running stickCut()");
+		System.out.println("\nRunning stickCut()");
 		int num = n;
 		int numToReturn = num;
 		int[] input = A;
-		int smallest = input[0];
+		int smallest = 10;
 		int zeroCount = 0;
 		
 		/* Calculating array length removing 0's for array declaration */
@@ -76,46 +76,51 @@ public class Driver3 {
 			}/* if */
 		}/* for */
 		numToReturn = (numToReturn - zeroCount);
-		int[] toReturn = new int[numToReturn];
+		int[] toReturn1 = new int[numToReturn];
 		
-		if(num == 0){
-			toReturn[0] = 0;
-			for(int i = 0; i < (numToReturn-1); i++){
-				System.out.println(toReturn[i]);
-			}/* for */
-			return toReturn;
-		}else if (num == 1){
-			toReturn[0] = 0;
-			for(int i = 0; i < (numToReturn-1); i++){
-				System.out.println(toReturn[i]);
-			}/* for */
-			return toReturn;
+		if(num == 0 || num == 1){
+			return null;
 		}else{
 			/* Finding smallest stick */
 			for(int i = 0; i < (num-1); i++){
-				if(smallest > input[i]){
+				if(smallest > input[i] && input[i] != 0){
 					smallest = input[i];
 				}/* if */
 			}/* for */
 			
 			/* Subtracting */
 			int toReturnVal = 0;
+			zeroCount = 0;
 			for(int i = 0; i < (num-1); i++){
 				if(input[i] != 0){
-					toReturn[toReturnVal] = (input[i] - smallest);
-					if(toReturn[toReturnVal] <= 0){
-						toReturn[toReturnVal] = 0;
+					toReturn1[toReturnVal] = (input[i] - smallest);
+					if(toReturn1[toReturnVal] <= 0){
+						toReturn1[toReturnVal] = 0;
+						zeroCount++;
 					}/* if */	
 					toReturnVal++;
 				}else if(input[i] == 0){
-					/* Do Nothing */
+					zeroCount++;
 				}/* if */
 			}/* for */
 			
-			for(int i = 0; i < (numToReturn-1); i++){
-				System.out.println(toReturn[i]);
+			/* Calculating array length removing 0's for array declaration */
+			numToReturn = (num - zeroCount);
+			int[] toReturn2 = new int[numToReturn];
+			
+			toReturnVal = 0;
+			for(int i = 0; i < (num-1); i++){
+				if(toReturn1[i] != 0){
+					toReturn2[toReturnVal] = toReturn1[i];
+					toReturnVal++;
+				}/* if */
 			}/* for */
-			return stickCut(numToReturn, toReturn);
+			
+			for(int i = 0; i < (toReturnVal); i++){
+				System.out.print(toReturn2[i] + " ");
+			}/* for */
+			
+			return stickCut(numToReturn, toReturn2);
 			
 		}/* if */
 	}/* stickCut() */		
