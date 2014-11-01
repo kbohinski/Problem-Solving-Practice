@@ -31,7 +31,7 @@
  */
 
 /* Setting Package */
-package HackerRank;
+package hackerRank;
 
 /* Setting Imports */
 /* No Imports Needed */
