@@ -11,3 +11,24 @@
 /* Setting Imports */
 import java.io.*;
 
+public class Binary {
+    public static void main (String[] args) throws IOException {
+        File file = new File(args[0]);
+        BufferedReader buffer = new BufferedReader(new FileReader(file));
+        String line;
+        while ((line = buffer.readLine()) != null) {
+            System.out.println(changeBase(2, Integer.parseInt(line)));
+        }
+    }
+    
+    public static String changeBase(int base, int inputNum){
+		    int quotient = (inputNum/base);
+		    int remainder = (inputNum%base);
+
+		    if ((inputNum/base) == 0) {
+			    return "" + remainder;
+		    } else {
+			    return ("" + changeBase(base,quotient) + remainder);
+		    }
+	}
+}
